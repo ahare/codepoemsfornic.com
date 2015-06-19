@@ -1,20 +1,20 @@
 <% @title = "Code Poems For Nic" %>
 
-<pre>$ <code id="code"></code></pre>
+$ <code id="code"></code>
+<div id="list">
+  <% @poems.each do |poem| %>
+    <div><a href="/poems/<%= poem %>"><%= poem %></a></div>
+  <% end %>
+</div>
+
 <script>
   $(function() {
       $("#code").typed({
-          contentType: "html",
-          strings: ["^1000ls poems<br/>"],
-          typeSpeed: 0,
+          strings: ["^1000ls poems"],
           callback: function() {
-            $("#code").append(''
-              <% @poems.each do |poem| %>
-                + '<br/>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/poems/<%= poem %>"><%= poem %></a>'
-              <% end %>
-                + '<br/>'
-            );
-          }
+            $("#code").append($("#list").html());
+          },
+          typeSpeed: 0
       });
   });
 </script>

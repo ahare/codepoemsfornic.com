@@ -1,3 +1,5 @@
 <% @title = params["name"] %>
 
-<pre><code><%= @poem %></code></pre>
+<pre><code data-language="<%= @lang %>"><%= @poem %></code></pre>
+
+<script src="/js/rainbow-custom.min.js"></script>

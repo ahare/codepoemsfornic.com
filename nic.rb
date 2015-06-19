@@ -1,17 +1,23 @@
 require "rubygems"
 require "sinatra"
 require "tilt/erb"
-require "rest-client"
+
+APP_ROOT = File.dirname(__FILE__)
+POEMS = File.join(APP_ROOT, "poems")
 
 get "/" do
-  @poems = JSON.parse(RestClient.get("https://api.github.com/repos/ahare/code-poems-for-nic/contents"))
-            .map {|h| h["name"]}
-            .select {|n| n != "README"}
-            .sort_by {|n| n}
+  @poems = Dir.entries(POEMS)
+              .select  {|f| !File.directory? f}
+              .sort_by {|f| f}
   erb :index
 end
 
 get "/poems/:name" do
-    @poem = RestClient.get "https://raw.githubusercontent.com/ahare/code-poems-for-nic/master/#{@name}"
+    @poem = File.read(File.join(POEMS, params["name"]))
+    @lang = case params["name"]
+      when /\.rb$/ then "ruby"
+      when /\.go$/ then "go"
+      when /\.cs$/ then "csharp"
+    end
     erb :poem
 end

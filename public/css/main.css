@@ -9,8 +9,19 @@ html {
   font-size: 2em;
 }
 
+#list {
+  display: none;
+}
+
 a {
-  color:#aaa;
+  color:#fff;
+  text-decoration: none;
+  padding: .1em;
+  margin: .1em .1em .1em 1em;
+}
+
+a:hover {
+  background-color: rgba(255,255,255,0.2);
 }
 
 .typed-cursor{
