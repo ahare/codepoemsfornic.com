@@ -1,6 +1,0 @@
-.excludes
-.git
-.gitignore
-log/
-tmp/
-vendor/
